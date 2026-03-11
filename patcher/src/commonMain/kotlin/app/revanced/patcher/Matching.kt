@@ -950,11 +950,6 @@ fun MutablePredicateList<Method>.instructions(build: Function<IndexedMatcher<Ins
     predicate { implementation { match(instructions) } }
 }
 
-fun MutablePredicateList<Method>.instructions(vararg predicates: IndexedMatcherPredicate<Instruction>) =
-    instructions {
-        predicates.forEach { +it }
-    }
-
 context(matchers: MutableList<IndexedMatcher<Instruction>>)
 fun MutablePredicateList<Method>.instructions(build: Function<IndexedMatcher<Instruction>>) {
     val match = indexedMatcher(build).also(matchers::add)
@@ -962,10 +957,19 @@ fun MutablePredicateList<Method>.instructions(build: Function<IndexedMatcher<Ins
     predicate { implementation { match(instructions) } }
 }
 
+fun MutablePredicateList<Method>.instructions(vararg predicates: IndexedMatcherPredicate<Instruction>) =
+    instructions {
+        predicates.forEach { +it }
+    }
+
 context(matchers: MutableList<IndexedMatcher<Instruction>>)
 fun MutablePredicateList<Method>.instructions(vararg predicates: IndexedMatcherPredicate<Instruction>) =
     instructions { predicates.forEach { +it } }
 
+fun MutablePredicateList<Method>.instructions(vararg predicates: Predicate<Instruction>) =
+    instructions { predicates.forEach { add { _, _, _ -> it() } } }
+
+context(matchers: MutableList<IndexedMatcher<Instruction>>)
 fun MutablePredicateList<Method>.instructions(vararg predicates: Predicate<Instruction>) =
     instructions { predicates.forEach { add { _, _, _ -> it() } } }
 
