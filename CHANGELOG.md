@@ -1,3 +1,10 @@
+## [22.0.1-dev.2](https://github.com/ReVanced/revanced-patcher/compare/v22.0.1-dev.1...v22.0.1-dev.2) (2026-03-11)
+
+
+### Bug Fixes
+
+* Add missing instructions matching overload ([cde646f](https://github.com/ReVanced/revanced-patcher/commit/cde646fc065dec7d52017eb8786f6da21305881d))
+
 ## [22.0.1-dev.1](https://github.com/ReVanced/revanced-patcher/compare/v22.0.0...v22.0.1-dev.1) (2026-03-05)
 
 
