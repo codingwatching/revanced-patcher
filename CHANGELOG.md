@@ -1,3 +1,10 @@
+## [22.0.1-dev.3](https://github.com/ReVanced/revanced-patcher/compare/v22.0.1-dev.2...v22.0.1-dev.3) (2026-03-13)
+
+
+### Bug Fixes
+
+* Write the patches results only on access of the fields to be able to control the time of write ([57c3358](https://github.com/ReVanced/revanced-patcher/commit/57c3358d4eacbe4f6a78235234f806abfeca7e1c))
+
 ## [22.0.1-dev.2](https://github.com/ReVanced/revanced-patcher/compare/v22.0.1-dev.1...v22.0.1-dev.2) (2026-03-11)
 
 
