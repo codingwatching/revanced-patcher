@@ -1,3 +1,25 @@
+## [22.0.1-dev.3](https://github.com/ReVanced/revanced-patcher/compare/v22.0.1-dev.2...v22.0.1-dev.3) (2026-03-13)
+
+
+### Bug Fixes
+
+* Write the patches results only on access of the fields to be able to control the time of write ([57c3358](https://github.com/ReVanced/revanced-patcher/commit/57c3358d4eacbe4f6a78235234f806abfeca7e1c))
+
+## [22.0.1-dev.2](https://github.com/ReVanced/revanced-patcher/compare/v22.0.1-dev.1...v22.0.1-dev.2) (2026-03-11)
+
+
+### Bug Fixes
+
+* Add missing instructions matching overload ([cde646f](https://github.com/ReVanced/revanced-patcher/commit/cde646fc065dec7d52017eb8786f6da21305881d))
+
+## [22.0.1-dev.1](https://github.com/ReVanced/revanced-patcher/compare/v22.0.0...v22.0.1-dev.1) (2026-03-05)
+
+
+### Bug Fixes
+
+* Add missing type parameter to match ([4a506b7](https://github.com/ReVanced/revanced-patcher/commit/4a506b7efafddd27d9cf35d4f59be1eec5caed82))
+* Use API available below SDK 35 ([92fec83](https://github.com/ReVanced/revanced-patcher/commit/92fec8350af9d2936b8d3b0c3975552b5bdbfe21))
+
 # [22.0.0](https://github.com/ReVanced/revanced-patcher/compare/v21.0.0...v22.0.0) (2026-02-20)
 
 

@@ -636,7 +636,7 @@ fun gettingFirstClassDefDeclarativelyOrNull(
 fun gettingFirstClassDefDeclaratively(
     type: String? = null,
     build: context(BytecodePatchContext) MutablePredicateList<ClassDef>.() -> Unit = { },
-) = cachedReadOnlyProperty { firstClassDefDeclaratively { build() } }
+) = cachedReadOnlyProperty { firstClassDefDeclaratively(type) { build() } }
 
 typealias IndexedMatcherPredicate<T> = T.(lastMatchedIndex: Int, currentIndex: Int, setNextIndex: (Int?) -> Unit) -> Boolean
 
@@ -754,7 +754,7 @@ fun <T> unorderedAllOf(vararg predicates: IndexedMatcherPredicate<T>): Array<Ind
                 // Detect backtracking: if revisiting an earlier pattern position, truncate the list to that position.
                 if (patternIndex <= lastPatternIndex) {
                     while (usedPredicateIndices.size > patternIndex) {
-                        usedPredicateIndices.removeLast()
+                        usedPredicateIndices.removeAt(usedPredicateIndices.lastIndex)
                     }
                 }
 
@@ -950,11 +950,6 @@ fun MutablePredicateList<Method>.instructions(build: Function<IndexedMatcher<Ins
     predicate { implementation { match(instructions) } }
 }
 
-fun MutablePredicateList<Method>.instructions(vararg predicates: IndexedMatcherPredicate<Instruction>) =
-    instructions {
-        predicates.forEach { +it }
-    }
-
 context(matchers: MutableList<IndexedMatcher<Instruction>>)
 fun MutablePredicateList<Method>.instructions(build: Function<IndexedMatcher<Instruction>>) {
     val match = indexedMatcher(build).also(matchers::add)
@@ -962,10 +957,19 @@ fun MutablePredicateList<Method>.instructions(build: Function<IndexedMatcher<Ins
     predicate { implementation { match(instructions) } }
 }
 
+fun MutablePredicateList<Method>.instructions(vararg predicates: IndexedMatcherPredicate<Instruction>) =
+    instructions {
+        predicates.forEach { +it }
+    }
+
 context(matchers: MutableList<IndexedMatcher<Instruction>>)
 fun MutablePredicateList<Method>.instructions(vararg predicates: IndexedMatcherPredicate<Instruction>) =
     instructions { predicates.forEach { +it } }
 
+fun MutablePredicateList<Method>.instructions(vararg predicates: Predicate<Instruction>) =
+    instructions { predicates.forEach { add { _, _, _ -> it() } } }
+
+context(matchers: MutableList<IndexedMatcher<Instruction>>)
 fun MutablePredicateList<Method>.instructions(vararg predicates: Predicate<Instruction>) =
     instructions { predicates.forEach { add { _, _, _ -> it() } } }
 

@@ -121,19 +121,25 @@ fun Set<Patch>.apply(
         )
     }
 
-    return PatchesResult(bytecodePatchContext.get(), resourcePatchContext.get())
+    return PatchesResult(bytecodePatchContext::get, resourcePatchContext::get)
 }
 
 /**
  * The result of applying patches.
- *
- * @param dexFiles The patched dex files.
- * @param resources The patched resources.
  */
 class PatchesResult internal constructor(
-    val dexFiles: Set<PatchedDexFile>,
-    val resources: PatchedResources?,
+    getDexFiles: () -> Set<PatchedDexFile>,
+    getResources: () -> PatchedResources?,
 ) {
+    /**
+     * The patched dex files.
+     */
+    val dexFiles by lazy(getDexFiles)
+
+    /**
+     * The patched resources, or null if no resources were patched.
+     */
+    val resources by lazy(getResources)
     /**
      * A dex file.
      *
